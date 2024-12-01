@@ -2,20 +2,87 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+body {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+
+    --radius: 0.5rem;
+
+    /* Custom Colors */
+    --brand-blue: 217.2 91.2% 59.8%;
+    --brand-purple: 262.1 83.3% 57.8%;
+    --brand-green: 142.1 70.6% 45.3%;
+    --brand-orange: 24.6 95% 53.1%;
+    
+    --surface-dark: 222.2 84% 4.9%;
+    --surface-darker: 223 84% 3%;
+    --surface-lighter: 223 84% 8%;
+    
+    --border-subtle: 217.2 32.6% 17.5%;
+    --border-strong: 215 25% 27%;
+  }
+}
+
+/* Custom utility classes */
+@layer components {
+  .gradient-border {
+    @apply border border-transparent bg-gradient-to-r from-[hsl(var(--brand-blue))] to-[hsl(var(--brand-purple))] bg-clip-border;
+  }
+
+  .glass-panel {
+    @apply bg-[hsl(var(--surface-lighter))] backdrop-blur-lg border border-[hsl(var(--border-subtle))];
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--brand-blue))] to-[hsl(var(--brand-purple))];
+  }
+
+  .gradient-bg {
+    @apply bg-gradient-to-r from-[hsl(var(--brand-blue))] to-[hsl(var(--brand-purple))];
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
