@@ -26,11 +26,17 @@ interface CompilationResult {
   bytecode: string;
 }
 
+// Add interface for flow summary item
+interface FlowSummaryItem {
+  content: string;
+  id?: string;
+}
+
 const CompilePage: React.FC = () => {
     const searchParams = useSearchParams();
     const [nodes, setNodes] = useState([]);
     const [edges, setEdges] = useState([]);
-    const [flowSummary, setFlowSummary] = useState([]);
+    const [flowSummary, setFlowSummary] = useState<FlowSummaryItem[]>([]);
     // Update the type of apiResponse
     const [apiResponse, setApiResponse] = useState<CompilationResult | null>(null);
     const [bytecode, setBytecode] = useState<string | null>(null);
@@ -59,41 +65,39 @@ const CompilePage: React.FC = () => {
             edges: edges,
             summary: flowSummary
         };
-        console.log('Flow Summary JSON:', JSON.stringify(flowSummaryJSON, null, 2));
 
-        const bodyofthecall = JSON.stringify(flowSummaryJSON)
-            .replace(/[{}"]/g, '')
-            .replace(/:/g, ': ')
-            .replace(/,/g, ', ');
+        try {
+            // Convert flow summary to a natural language prompt
+            const prompt = `Create a smart contract with the following structure:
+              ${flowSummary.map(item => `- ${item.content}`).join('\n')}
+            `;
 
+            // Get contract from Brian AI
+            const brianResponse = await fetch('/api/brian-contract', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ prompt }),
+            });
 
-       console.log(bodyofthecall)
-       
-       const response = await fetch('/customllm', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                message: bodyofthecall,
-                name: '',
-            }),
-        });
-        const outputs = await response.json();
+            const brianResult = await brianResponse.json();
+            
+            if (!brianResult.success) {
+                console.error('Brian AI error:', brianResult.error);
+                return;
+            }
 
-        const resultofcompilation = await fetch('/compile-contract', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ 
-                contractName: outputs.contractName, 
-                name: outputs.contractName.toString 
-            }),
-        });
-        const compilationResult: CompilationResult = await resultofcompilation.json();
-        setApiResponse(compilationResult);
-        setBytecode(compilationResult.bytecode);
+            // Set the compilation results directly from Brian AI
+            setApiResponse({
+                abi: brianResult.abi,
+                bytecode: brianResult.bytecode
+            });
+            setBytecode(brianResult.bytecode);
+
+        } catch (error) {
+            console.error('Error in compilation process:', error);
+        }
     };
 
 

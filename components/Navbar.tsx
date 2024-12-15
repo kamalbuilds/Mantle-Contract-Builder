@@ -46,15 +46,10 @@ export default function Navbar({ className }: NavbarProps) {
             <span className="text-gray-300">Smart Contract Builder</span>
           </div>
 
-          <div className="flex items-center">
-            <NavItem icon={<Settings size={18} />} text="Save" href="/save" />
-            <NavItem
-              icon={<FolderKanban size={18} />}
-              text="Projects"
-              href="/home"
-            />
-          </div>
-        </div>
+                    <div className="flex items-center">
+                        <NavItem icon={<FolderKanban size={18} />} text="Projects" href="/home" />
+                    </div>
+                </div>
 
         <div className="flex flex-row justify-end">
           <div className="flex items-center">
