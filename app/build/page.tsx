@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useState } from "react";
 import Image from "next/image";
 import Web3BlocksComponent from "../../components/web3-blocks";
@@ -13,17 +13,19 @@ export default function Home() {
   const handleCreateContract = async () => {
     setErrorMessage(null);
     try {
-      const response = await fetch('/deploy-contract', {
-        method: 'POST',
+      const response = await fetch("/deploy-contract", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ /* your contract creation data */ }),
+        body: JSON.stringify({
+          /* your contract creation data */
+        }),
       });
 
       if (!response.ok) {
         const errorData = await response.json(); // Get error details from response
-        throw new Error(errorData.message || 'Failed to create contract'); // Use error message from response if available
+        throw new Error(errorData.message || "Failed to create contract"); // Use error message from response if available
       }
 
       const data = await response.json();
@@ -31,10 +33,10 @@ export default function Home() {
     } catch (error: unknown) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
-        console.error('Error creating contract:', error.message);
+        console.error("Error creating contract:", error.message);
       } else {
-        setErrorMessage('An unknown error occurred');
-        console.error('Error creating contract:', error);
+        setErrorMessage("An unknown error occurred");
+        console.error("Error creating contract:", error);
       }
     }
   };
@@ -44,10 +46,16 @@ export default function Home() {
       <main className="flex flex-col gap-4 row-start-2 items-center sm:items-start">
         <div className="w-full">
           <Web3BlocksComponent />
-          <button onClick={handleCreateContract} className="mt-4 p-2 bg-blue-500 text-white rounded">
+          <button
+            onClick={handleCreateContract}
+            className="mt-4 p-2 bg-blue-500 text-white rounded"
+          >
             Create Contract
           </button>
-          {errorMessage && <div className="text-red-500 mt-2">{errorMessage}</div>} {/* Display error message */}
+          {errorMessage && (
+            <div className="text-red-500 mt-2">{errorMessage}</div>
+          )}{" "}
+          {/* Display error message */}
           {contractCode && <ContractCode code={contractCode} />}
         </div>
         <Sidebar />

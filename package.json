@@ -24,6 +24,7 @@
     "@rainbow-me/rainbowkit": "^2.2.0",
     "@xyflow/react": "^12.3.2",
     "alchemy-sdk": "^3.4.3",
+    "axios": "^1.7.9",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
