@@ -81,7 +81,7 @@ import EventNode from './EventNode'
 
 const blockTypes = [
   // Trigger Actions
-  { id: 'start', content: 'Start', color: 'bg-[#451805]', borderColor: 'border-[#8A5035]', hoverBorderColor: 'hover:border-[#BE5B2A]', icon: Flag },
+  { id: 'start', content: 'Start', color: 'bg-[#451805]', borderColor: 'border-[#8A5035]', hoverBorderColor: 'hover:border-[#BE5B2A]', icon: Power },
   { id: 'end', content: 'End', color: 'bg-[#451805]', borderColor: 'border-[#8A5035]', hoverBorderColor: 'hover:border-[#BE5B2A]', icon: Power },
 
   // Token Actions

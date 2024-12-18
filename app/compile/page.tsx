@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import ContractFlow from '@/app/compile/ContractFlow';
@@ -100,8 +100,17 @@ const CompilePage: React.FC = () => {
         }
     };
 
+    function LoadingComponent() {
+        return (
+            <div className="h-full flex items-center justify-center">
+                <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500"></div>
+            </div>
+        );
+    }
+
 
     return (
+                <Suspense fallback={<LoadingComponent />}>
         <div className="h-full">
 
             <div className="flex gap-6 h-full">
@@ -183,6 +192,8 @@ const CompilePage: React.FC = () => {
                 </div>
             )}
         </div>
+        </Suspense>
+        
     );
 };
 

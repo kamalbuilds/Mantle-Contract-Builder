@@ -22,10 +22,6 @@ export default function Navbar({ className }: NavbarProps) {
   const { theme, setTheme } = useTheme();
   const [isActive, setIsActive] = useState(false);
 
-  useEffect(() => {
-    // Any client-side logic that might affect class names
-  }, []);
-
   return (
     <nav
       className={`fixed w-full bg-[#141313] text-white border-b border-[#555555] ${className}`}
