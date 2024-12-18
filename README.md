@@ -11,7 +11,7 @@ The **Smart Contract Builder** addresses these challenges by providing a compreh
 
 ## Features
 - **User-Friendly Interface**: Intuitive design for seamless navigation and contract creation.
-- **Multi-Blockchain Support**: Deploy contracts on Ethereum, Binance Smart Chain, and more.
+- **Mantle Support**: Build and Deploy contracts on Mantle with ease.
 - **Template Library**: Access to pre-built templates for common contract types (ERC20, ERC721, etc.).
 - **Testing Environment**: Built-in tools to simulate contract interactions and ensure functionality.
 - **Deployment Tools**: Step-by-step guidance for deploying contracts on various blockchains.
@@ -35,7 +35,7 @@ To get started with the Smart Contract Builder, follow these steps:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/smart-contract-builder.git
+   git clone https://github.com/kamalbuilds/smart-contract-builder.git
    cd smart-contract-builder
    ```
 
